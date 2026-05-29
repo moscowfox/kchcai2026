@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="北京康城合创 - AGI时代的算力领航者，专业的AI基础设施与应用服务综合提供商">
+    <meta name="keywords" content="AI算力,人工智能,大模型,生物识别,火山引擎,北京康城合创">
+    <title>北京康城合创 | kchc.ai - AGI时代的算力领航者</title>
+    <style>
+/* --- 全局变量与重置 --- */
+:root {
+    --bg-color: #050a14;
+    --card-bg: rgba(20, 30, 50, 0.6);
+    --text-main: #ffffff;
+    --text-sub: #a0aab8;
+    --accent-cyan: #00f2ff;
+    --accent-purple: #bc13fe;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+ul { 
+    list-style: none; 
+}
+
+/* --- 动画关键帧 --- */
+@keyframes flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* --- 导航栏 --- */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5, 10, 20, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    background: rgba(5, 10, 20, 0.95);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #fff, var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 30px; 
+}
+
+.nav-links a { 
+    font-size: 14px; 
+    color: var(--text-sub); 
+    transition: 0.3s; 
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-cyan);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover { 
+    color: var(--accent-cyan); 
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.mobile-menu-btn { 
+    display: none; 
+    font-size: 24px; 
+    color: #fff; 
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(5, 10, 20, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 80px 30px 30px;
+    flex-direction: column;
+    gap: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    border-left: 1px solid var(--glass-border);
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu a {
+    color: var(--text-sub);
+    font-size: 18px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.mobile-menu a:hover {
+    color: var(--accent-cyan);
+    padding-left: 10px;
+}
+
+/* --- Hero 首屏 --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5%;
+    position: relative;
+    background: radial-gradient(circle at center, #1a2a40 0%, var(--bg-color) 70%);
+    overflow: hidden;
+}
+
+/* 背景动态网格 */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+    animation: flow 100s linear infinite;
+    opacity: 0.3;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #ffffff, var(--accent-cyan), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-sub);
+    max-width: 800px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.cta-btn {
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bg-color);
+    background: var(--accent-cyan);
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.cta-btn:hover {
+    transform: scale(1.05);
+    background: #fff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+/* --- 通用板块样式 --- */
+section {
+    padding: 80px 5%;
+    position: relative;
+}
+
+.section-title {
+    font-size: clamp(24px, 4vw, 32px);
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.section-title span {
+    border-bottom: 3px solid var(--accent-cyan);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* --- 核心优势 (Cards) --- */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 40px;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 40px -10px rgba(0, 242, 255, 0.2);
+}
+
+.card h3 { 
+    font-size: 20px; 
+    margin-bottom: 15px; 
+    color: #fff; 
+}
+
+.card p { 
+    font-size: 14px; 
+    color: var(--text-sub); 
+    line-height: 1.8;
+}
+
+.icon-box {
+    width: 50px; 
+    height: 50px;
+    background: rgba(0, 242, 255, 0.1);
+    border-radius: 10px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--accent-cyan);
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+.card:hover .icon-box {
+    background: rgba(0, 242, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* --- 业务版图 --- */
+.business-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.biz-group {
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    transition: 0.4s;
+}
+
+.biz-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px -10px rgba(0, 242, 255, 0.2);
+}
+
+.biz-engine {
+    background: linear-gradient(135deg, rgba(188, 19, 254, 0.1), rgba(0, 0, 0, 0));
+}
+
+.biz-foundation {
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(0, 0, 0, 0));
+}
+
+.biz-list li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+    color: var(--text-sub);
+    line-height: 1.8;
+}
+
+.biz-list li::before {
+    content: '•';
+    color: var(--accent-cyan);
+    position: absolute;
+    left: 0;
+    font-size: 20px;
+}
+
+/* --- 案例 --- */
+.logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0.7;
+}
+
+.logo-item {
+    padding: 15px 30px;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: default;
+}
+
+.logo-item:hover {
+    opacity: 1;
+    border-color: var(--accent-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 242, 255, 0.2);
+}
+
+/* --- 发展历程 --- */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    border-left: 2px solid var(--glass-border);
+    padding-left: 30px;
+    position: relative;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: 0.6s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-item::before {
+    content: '';
+    width: 12px; 
+    height: 12px;
+    background: var(--accent-cyan);
+    border-radius: 50%;
+    position: absolute;
+    left: -37px;
+    top: 5px;
+    box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.year { 
+    color: var(--accent-cyan); 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+    display: block;
+    font-size: 18px;
+}
+
+.timeline-item h3 {
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.timeline-item p {
+    color: var(--text-sub);
+    line-height: 1.8;
+}
+
+/* --- 联系方式 --- */
+.contact-section {
+    background: linear-gradient(to top, #000, var(--bg-color));
+    text-align: center;
+}
+
+.contact-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.contact-item {
+    min-width: 200px;
+}
+
+.contact-item h4 { 
+    color: var(--text-sub); 
+    margin-bottom: 10px; 
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.contact-item p { 
+    font-size: 24px; 
+    font-weight: 700; 
+    color: #fff; 
+}
+
+.contact-item a { 
+    transition: 0.3s; 
+    display: inline-block;
+}
+
+.contact-item a:hover { 
+    color: var(--accent-cyan); 
+    text-shadow: 0 0 15px var(--accent-cyan); 
+    transform: scale(1.05);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+    color: #555;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* --- 响应式调整 --- */
+@media (max-width: 768px) {
+    .nav-links { 
+        display: none; 
+    }
+    
+    .mobile-menu-btn { 
+        display: block; 
+    }
+    
+    .hero h1 { 
+        font-size: 2.2rem; 
+    }
+    
+    .business-layout { 
+        grid-template-columns: 1fr; 
+    }
+    
+    .contact-item p { 
+        font-size: 18px; 
+    }
+    
+    .features { 
+        grid-template-columns: 1fr; 
+    }
+    
+    .contact-box {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    section {
+        padding: 60px 5%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    .card {
+        padding: 30px 20px;
+    }
+    
+    .biz-group {
+        padding: 30px 20px;
+    }
+}
+
+/* 动画类 */
+.visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header>
+        <div class="logo">kchc.ai</div>
+        <nav class="nav-links">
+            <a href="#solutions">解决方案</a>
+            <a href="#services">服务体系</a>
+            <a href="#cases">客户案例</a>
+            <a href="#about">关于我们</a>
+            <a href="#contact">联系我们</a>
+        </nav>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">☰</div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#solutions">解决方案</a>
+            <a href="#services">服务体系</a>
+            <a href="#cases">客户案例</a>
+            <a href="#about">关于我们</a>
+            <a href="#contact">联系我们</a>
+        </div>
+    </header>
+
+    <!-- Hero 首屏 -->
+    <section class="hero">
+        <h1>从感知智能<br>到AGI时代的算力领航者</h1>
+        <p>北京康城合创 —— 您的AI基础设施与应用服务综合提供商</p>
+        <div onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="cta-btn">
+            开启智能化转型
+        </div>
+    </section>
+
+    <!-- 核心优势 -->
+    <section class="scroll-anim" id="about">
+        <div class="section-title"><span>为什么选择康城合创</span></div>
+        <div class="features">
+            <div class="card">
+                <div class="icon-box">✦</div>
+                <h3>技术同源，能力升级</h3>
+                <p>从生物识别到大模型，12年AI工程化落地经验。将金融级的高并发、高安全能力平滑迁移至AI算力服务。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">☁</div>
+                <h3>软硬一体，双轮驱动</h3>
+                <p>火山引擎云原生架构 + 高性能GPU算力集群。不仅提供硬件，更提供从底层到应用的全栈环境搭建。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">🛡</div>
+                <h3>央企标准，信赖交付</h3>
+                <p>沿袭中国人民银行与国家电网的严苛交付标准，确保每一份算力、每一个应用都安全、稳定、合规。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 业务版图 -->
+    <section class="scroll-anim" id="solutions">
+        <div class="section-title"><span>业务版图</span></div>
+        <div class="business-layout">
+            <!-- 创新引擎 -->
+            <div class="biz-group biz-engine card">
+                <h3 style="color: var(--accent-purple);">🚀 创新引擎 · AI算力与云基座</h3>
+                <p style="margin-bottom: 20px;">面向大模型训练与推理时代，解决"算力焦虑"。</p>
+                <ul class="biz-list">
+                    <li><strong>AI算力服务器集成</strong>：高性能GPU集群解决方案</li>
+                    <li><strong>火山引擎全系服务</strong>：云原生、边缘计算、大数据</li>
+                    <li><strong>企业级智连安全</strong>：代理"飞连"All-in-One办公安全平台</li>
+                </ul>
+            </div>
+            <!-- 稳健基石 -->
+            <div class="biz-group biz-foundation card">
+                <h3 style="color: var(--accent-cyan);">🏛 稳健基石 · 智能识别与安防</h3>
+                <p style="margin-bottom: 20px;">成熟的感知智能技术，守护国家关键基础设施。</p>
+                <ul class="biz-list">
+                    <li><strong>金融级生物识别</strong>：人行标准活体指纹、高精人脸识别</li>
+                    <li><strong>智慧空间管理</strong>：智能视频分析、通道闸机系统</li>
+                    <li><strong>园区数字化</strong>：访客管理与安防综合平台</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务体系 -->
+    <section class="scroll-anim" id="services">
+        <div class="section-title"><span>服务体系</span></div>
+        <div class="features">
+            <div class="card">
+                <div class="icon-box">💼</div>
+                <h3>咨询规划</h3>
+                <p>专业的AI转型咨询，为企业量身定制算力与智能化解决方案。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">⚙️</div>
+                <h3>系统集成</h3>
+                <p>从硬件部署到软件配置，提供一站式系统集成服务。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">🔧</div>
+                <h3>运维支持</h3>
+                <p>7×24小时技术支持，确保系统稳定运行与持续优化。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户案例 -->
+    <section class="scroll-anim" id="cases">
+        <div class="section-title"><span>值得信赖的合作伙伴</span></div>
+        <div class="logos">
+            <div class="logo-item">中国人民银行</div>
+            <div class="logo-item">国家电网</div>
+            <div class="logo-item">中国化工</div>
+            <div class="logo-item">深业集团</div>
+            <div class="logo-item">字节跳动 | 火山引擎</div>
+            <div class="logo-item">自动驾驶独角兽企业</div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; color: var(--text-sub);">
+            <p>服务大量国家级基础设施与AI新势力，以"零差错"赢得长期信赖。</p>
+        </div>
+    </section>
+
+    <!-- 发展历程 -->
+    <section class="scroll-anim">
+        <div class="section-title"><span>发展历程</span></div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="year">2025 - 未来</span>
+                <h3>AI元年再出发</h3>
+                <p>全面布局AI算力服务器与行业应用，做AI浪潮中的长期主义者。</p>
+            </div>
+            <div class="timeline-item">
+                <span class="year">2020 - 2024</span>
+                <h3>云智转型</h3>
+                <p>携手字节跳动火山引擎，代理飞连与云服务，服务自动驾驶与AI客户。</p>
+            </div>
+            <div class="timeline-item">
+                <span class="year">2012 - 2019</span>
+                <h3>基石奠定</h3>
+                <p>深耕生物识别，服务人行、国网等央企，积累高安全级系统集成经验。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact-section scroll-anim" id="contact">
+        <div class="section-title"><span>联系我们</span></div>
+        <p style="color: var(--text-sub);">北京康城合创科技有限公司</p>
+        <p style="color: var(--text-sub); margin-bottom: 30px;">北京市丰台区</p>
+        
+        <div class="contact-box">
+            <div class="contact-item">
+                <h4>24小时业务热线</h4>
+                <p><a href="tel:18518156777">185-1815-6777</a></p>
+            </div>
+            <div class="contact-item">
+                <h4>公司总机</h4>
+                <p><a href="tel:01063893886">010-6389-3886</a></p>
+            </div>
+            <div class="contact-item">
+                <h4>商务邮箱</h4>
+                <p><a href="mailto:zuobing@atlantis9.com" style="font-size: 20px;">zuobing@atlantis9.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2012-2025 Beijing Kangcheng Hechuang Technology Co., Ltd. All Rights Reserved.</p>
+        <p>www.kchc.ai</p>
+    </footer>
+
+    <script>
+// 滚动显现动画逻辑
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
+
+// 观察所有需要动画的元素
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.scroll-anim, .card, .timeline-item').forEach(el => {
+        observer.observe(el);
+    });
+});
+
+// 移动端菜单切换
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        if (mobileMenu.classList.contains('active')) {
+            mobileMenuBtn.textContent = '✕';
+        } else {
+            mobileMenuBtn.textContent = '☰';
+        }
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.textContent = '☰';
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.textContent = '☰';
+        }
+    });
+}
+
+// 导航栏滚动效果
+let lastScroll = 0;
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Logo 点击返回顶部
+const logo = document.querySelector('.logo');
+if (logo) {
+    logo.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// 平滑滚动到锚点
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '#!') return;
+        
+        e.preventDefault();
+        const target = document.querySelector(href);
+        
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// 添加页面加载动画
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+        document.body.style.transition = 'opacity 0.5s ease-in';
+        document.body.style.opacity = '1';
+    }, 100);
+});
+    </script>
+</body>
+</html>

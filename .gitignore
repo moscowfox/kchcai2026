@@ -1,0 +1,43 @@
+# 临时文件和缓存
+*.log
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db
+
+# 部署相关文件（不需要上传）
+dist/
+*.zip
+website.zip
+index-deploy.html
+
+# 部署脚本（可选，如果不需要可以保留）
+# deploy.sh
+# deploy.ps1
+# deploy-complete.ps1
+# setup-nginx.sh
+# nginx.conf.example
+# WEB-TERMINAL-DEPLOY.sh
+
+# 文档文件（可选，如果不需要可以保留）
+# DEPLOY.md
+# QUICK-DEPLOY.md
+# DOMAIN-SETUP.md
+# UPLOAD-GUIDE.md
+# WINSCP-TROUBLESHOOT.md
+# 域名配置步骤.md
+# deploy-commands.txt
+
+# 临时资源文件
+assets/
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# IDE 文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
