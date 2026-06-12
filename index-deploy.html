@@ -7,21 +7,29 @@
     <meta name="keywords" content="AI算力,人工智能,大模型,生物识别,火山引擎,北京康城合创">
     <title>北京康城合创 | kchc.ai - AGI时代的算力领航者</title>
     <style>
+/* ============================================================
+   kchc.ai — 未来感 UI 样式系统
+   流体 WebGL 背景 + 玻璃拟态 + 霓虹光效
+   ============================================================ */
+
 /* --- 全局变量与重置 --- */
 :root {
-    --bg-color: #050a14;
-    --card-bg: rgba(20, 30, 50, 0.6);
+    --bg-color: #030610;
+    --card-bg: rgba(13, 22, 40, 0.45);
     --text-main: #ffffff;
-    --text-sub: #a0aab8;
+    --text-sub: #9fb0c8;
     --accent-cyan: #00f2ff;
     --accent-purple: #bc13fe;
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-blue: #2563eb;
+    --glass-border: rgba(140, 180, 255, 0.14);
+    --glow-cyan: rgba(0, 242, 255, 0.35);
+    --glow-purple: rgba(188, 19, 254, 0.30);
 }
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -31,15 +39,71 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    transition: opacity 0.8s ease;
 }
 
-a { 
-    text-decoration: none; 
-    color: inherit; 
+body.loaded {
+    opacity: 1;
 }
 
-ul { 
-    list-style: none; 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- 自定义滚动条 --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(0, 242, 255, 0.4), rgba(188, 19, 254, 0.4));
+    border-radius: 5px;
+    border: 2px solid var(--bg-color);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+}
+
+::selection {
+    background: rgba(0, 242, 255, 0.3);
+    color: #fff;
+}
+
+/* --- WebGL 流体背景画布 --- */
+#fluid-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* WebGL 不可用时的回退渐变 */
+body.no-webgl {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(188, 19, 254, 0.12), transparent),
+        radial-gradient(ellipse 70% 50% at 20% 70%, rgba(0, 100, 255, 0.15), transparent),
+        var(--bg-color);
+}
+
+/* 全屏柔光叠加，统一画面氛围 */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 120% 90% at 50% -20%, transparent 60%, rgba(3, 6, 16, 0.55) 100%);
 }
 
 /* --- 动画关键帧 --- */
@@ -51,21 +115,45 @@ ul {
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-12px); }
 }
 
 @keyframes fadeInUp {
-    from { 
-        opacity: 0; 
-        transform: translateY(30px); 
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* --- 导航栏 --- */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes borderRotate {
+    to { --border-angle: 360deg; }
+}
+
+@keyframes scrollHint {
+    0%, 100% { transform: translate(-50%, 0); opacity: 1; }
+    50% { transform: translate(-50%, 12px); opacity: 0.3; }
+}
+
+/* --- 导航栏（悬浮玻璃舱） --- */
 header {
     position: fixed;
     top: 0;
@@ -74,38 +162,60 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 10, 20, 0.8);
-    backdrop-filter: blur(15px);
+    background: rgba(5, 10, 22, 0.45);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
     z-index: 1000;
     border-bottom: 1px solid var(--glass-border);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+}
+
+/* 导航底部流光线 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--accent-cyan) 30%,
+        var(--accent-purple) 70%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: gradientShift 6s ease infinite;
+    opacity: 0.6;
 }
 
 header.scrolled {
-    background: rgba(5, 10, 20, 0.95);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(4, 8, 18, 0.8);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 242, 255, 0.08);
 }
 
 .logo {
     font-size: 24px;
     font-weight: 700;
-    background: linear-gradient(90deg, #fff, var(--accent-cyan));
+    background: linear-gradient(90deg, #fff, var(--accent-cyan), var(--accent-purple));
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 1px;
     cursor: pointer;
+    animation: gradientShift 5s ease infinite;
+    filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.35));
 }
 
-.nav-links { 
-    display: flex; 
-    gap: 30px; 
+.nav-links {
+    display: flex;
+    gap: 30px;
 }
 
-.nav-links a { 
-    font-size: 14px; 
-    color: var(--text-sub); 
-    transition: 0.3s; 
+.nav-links a {
+    font-size: 14px;
+    color: var(--text-sub);
+    transition: 0.3s;
     position: relative;
 }
 
@@ -116,22 +226,24 @@ header.scrolled {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--accent-cyan);
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    box-shadow: 0 0 8px var(--glow-cyan);
     transition: width 0.3s ease;
 }
 
-.nav-links a:hover { 
-    color: var(--accent-cyan); 
+.nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 12px var(--glow-cyan);
 }
 
 .nav-links a:hover::after {
     width: 100%;
 }
 
-.mobile-menu-btn { 
-    display: none; 
-    font-size: 24px; 
-    color: #fff; 
+.mobile-menu-btn {
+    display: none;
+    font-size: 24px;
+    color: #fff;
     cursor: pointer;
     z-index: 1001;
 }
@@ -144,14 +256,16 @@ header.scrolled {
     width: 70%;
     max-width: 300px;
     height: 100vh;
-    background: rgba(5, 10, 20, 0.98);
-    backdrop-filter: blur(20px);
+    background: rgba(4, 8, 18, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     padding: 80px 30px 30px;
     flex-direction: column;
     gap: 20px;
-    transition: right 0.3s ease;
+    transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 1000;
     border-left: 1px solid var(--glass-border);
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6);
 }
 
 .mobile-menu.active {
@@ -169,6 +283,7 @@ header.scrolled {
 .mobile-menu a:hover {
     color: var(--accent-cyan);
     padding-left: 10px;
+    text-shadow: 0 0 12px var(--glow-cyan);
 }
 
 /* --- Hero 首屏 --- */
@@ -181,22 +296,39 @@ header.scrolled {
     text-align: center;
     padding: 0 5%;
     position: relative;
-    background: radial-gradient(circle at center, #1a2a40 0%, var(--bg-color) 70%);
     overflow: hidden;
 }
 
-/* 背景动态网格 */
+/* 3D 透视网格（叠加在流体背景之上，增加纵深） */
 .hero::before {
     content: '';
     position: absolute;
     width: 200%;
     height: 200%;
-    background: linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+    background: linear-gradient(rgba(0, 242, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.07) 1px, transparent 1px);
     background-size: 50px 50px;
     transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
     animation: flow 100s linear infinite;
-    opacity: 0.3;
+    opacity: 0.4;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 75%);
+}
+
+/* 竖向扫描光带 */
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(180deg,
+        transparent,
+        rgba(0, 242, 255, 0.045) 50%,
+        transparent);
+    animation: scanline 9s linear infinite;
+    pointer-events: none;
 }
 
 .hero h1 {
@@ -204,13 +336,15 @@ header.scrolled {
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 20px;
-    background: linear-gradient(120deg, #ffffff, var(--accent-cyan), var(--accent-purple));
+    background: linear-gradient(120deg, #ffffff 20%, var(--accent-cyan) 50%, var(--accent-purple) 80%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
     z-index: 1;
-    animation: fadeInUp 1s ease-out;
+    animation: fadeInUp 1s ease-out, gradientShift 8s ease infinite;
+    filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.25));
 }
 
 .hero p {
@@ -224,46 +358,117 @@ header.scrolled {
 }
 
 .cta-btn {
-    padding: 15px 40px;
+    padding: 16px 44px;
     font-size: 16px;
     font-weight: 600;
-    color: var(--bg-color);
-    background: var(--accent-cyan);
-    border: none;
-    border-radius: 30px;
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-    transition: 0.3s;
+    color: #fff;
+    background: linear-gradient(120deg, rgba(0, 242, 255, 0.18), rgba(188, 19, 254, 0.18));
+    border: 1px solid rgba(0, 242, 255, 0.55);
+    border-radius: 32px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow:
+        0 0 24px var(--glow-cyan),
+        inset 0 0 18px rgba(0, 242, 255, 0.12);
+    transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     z-index: 1;
     cursor: pointer;
+    overflow: hidden;
     animation: fadeInUp 1s ease-out 0.4s both;
 }
 
+/* 按钮内部流光 */
+.cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.cta-btn:hover::before {
+    left: 140%;
+}
+
 .cta-btn:hover {
-    transform: scale(1.05);
-    background: #fff;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px) scale(1.04);
+    border-color: var(--accent-cyan);
+    box-shadow:
+        0 0 45px var(--glow-cyan),
+        0 0 80px var(--glow-purple),
+        inset 0 0 24px rgba(0, 242, 255, 0.22);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+/* 滚动提示 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 38px;
+    border: 2px solid rgba(0, 242, 255, 0.45);
+    border-radius: 12px;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out 1s both;
+}
+
+.scroll-indicator::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--glow-cyan);
+    animation: scrollHint 2s ease-in-out infinite;
 }
 
 /* --- 通用板块样式 --- */
 section {
-    padding: 80px 5%;
+    padding: 100px 5%;
     position: relative;
 }
 
 .section-title {
-    font-size: clamp(24px, 4vw, 32px);
+    font-size: clamp(24px, 4vw, 34px);
     margin-bottom: 60px;
     text-align: center;
+    font-weight: 700;
 }
 
 .section-title span {
-    border-bottom: 3px solid var(--accent-cyan);
-    padding-bottom: 10px;
+    position: relative;
+    padding-bottom: 14px;
     display: inline-block;
+    background: linear-gradient(90deg, #fff, #cfeaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* --- 核心优势 (Cards) --- */
+.section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    box-shadow: 0 0 14px var(--glow-cyan);
+}
+
+/* --- 玻璃卡片（含鼠标光晕跟随 + 3D 倾斜承接） --- */
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -271,67 +476,95 @@ section {
 }
 
 .card {
+    --mx: 50%;
+    --my: 50%;
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    border-radius: 18px;
     padding: 40px;
-    transition: 0.4s;
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
     position: relative;
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
+    will-change: transform;
+    transform-style: preserve-3d;
 }
 
+/* 鼠标跟随光晕 */
 .card::before {
     content: '';
     position: absolute;
+    inset: 0;
+    background: radial-gradient(420px circle at var(--mx) var(--my),
+        rgba(0, 242, 255, 0.10),
+        rgba(188, 19, 254, 0.05) 40%,
+        transparent 65%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+/* 顶部高光描边 */
+.card::after {
+    content: '';
+    position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.1), transparent);
-    transition: left 0.5s ease;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .card:hover::before {
-    left: 100%;
+    opacity: 1;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-cyan);
-    box-shadow: 0 10px 40px -10px rgba(0, 242, 255, 0.2);
+    border-color: rgba(0, 242, 255, 0.55);
+    box-shadow:
+        0 20px 60px -15px rgba(0, 0, 0, 0.6),
+        0 0 40px -8px var(--glow-cyan),
+        inset 0 0 30px rgba(0, 242, 255, 0.04);
 }
 
-.card h3 { 
-    font-size: 20px; 
-    margin-bottom: 15px; 
-    color: #fff; 
+.card h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #fff;
 }
 
-.card p { 
-    font-size: 14px; 
-    color: var(--text-sub); 
+.card p {
+    font-size: 14px;
+    color: var(--text-sub);
     line-height: 1.8;
 }
 
 .icon-box {
-    width: 50px; 
-    height: 50px;
-    background: rgba(0, 242, 255, 0.1);
-    border-radius: 10px;
-    display: flex; 
-    align-items: center; 
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.15), rgba(188, 19, 254, 0.12));
+    border: 1px solid rgba(0, 242, 255, 0.25);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
     justify-content: center;
     margin-bottom: 20px;
     color: var(--accent-cyan);
     font-size: 24px;
-    transition: 0.3s;
+    transition: 0.35s;
+    box-shadow: 0 0 18px rgba(0, 242, 255, 0.10), inset 0 0 12px rgba(0, 242, 255, 0.08);
 }
 
 .card:hover .icon-box {
-    background: rgba(0, 242, 255, 0.2);
-    transform: scale(1.1);
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.28), rgba(188, 19, 254, 0.22));
+    transform: scale(1.12) translateZ(30px);
+    box-shadow: 0 0 28px var(--glow-cyan), inset 0 0 14px rgba(0, 242, 255, 0.18);
+    animation: float 3s ease-in-out infinite;
 }
 
 /* --- 业务版图 --- */
@@ -348,67 +581,104 @@ section {
     transition: 0.4s;
 }
 
-.biz-group:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px -10px rgba(0, 242, 255, 0.2);
+.biz-engine {
+    background: linear-gradient(135deg, rgba(188, 19, 254, 0.12), rgba(13, 22, 40, 0.4));
 }
 
-.biz-engine {
-    background: linear-gradient(135deg, rgba(188, 19, 254, 0.1), rgba(0, 0, 0, 0));
+.biz-engine:hover {
+    border-color: rgba(188, 19, 254, 0.55);
+    box-shadow:
+        0 20px 60px -15px rgba(0, 0, 0, 0.6),
+        0 0 40px -8px var(--glow-purple);
+}
+
+.biz-engine:hover::before {
+    background: radial-gradient(420px circle at var(--mx) var(--my),
+        rgba(188, 19, 254, 0.12),
+        rgba(0, 242, 255, 0.04) 40%,
+        transparent 65%);
 }
 
 .biz-foundation {
-    background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(0, 0, 0, 0));
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.10), rgba(13, 22, 40, 0.4));
 }
 
 .biz-list li {
     margin-bottom: 15px;
-    padding-left: 20px;
+    padding-left: 22px;
     position: relative;
     color: var(--text-sub);
     line-height: 1.8;
 }
 
 .biz-list li::before {
-    content: '•';
+    content: '▸';
     color: var(--accent-cyan);
     position: absolute;
     left: 0;
-    font-size: 20px;
+    font-size: 16px;
+    text-shadow: 0 0 8px var(--glow-cyan);
 }
 
-/* --- 案例 --- */
+.biz-list strong {
+    color: #e6f6ff;
+}
+
+/* --- 案例 Logo 墙 --- */
 .logos {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 40px;
-    opacity: 0.7;
 }
 
 .logo-item {
-    padding: 15px 30px;
+    --mx: 50%;
+    --my: 50%;
+    padding: 16px 32px;
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    color: #fff;
+    border-radius: 10px;
+    background: rgba(13, 22, 40, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.75);
     font-weight: bold;
     font-size: 16px;
     transition: 0.3s;
     cursor: default;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.logo-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(220px circle at var(--mx) var(--my),
+        rgba(0, 242, 255, 0.12), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.logo-item:hover::before {
+    opacity: 1;
 }
 
 .logo-item:hover {
-    opacity: 1;
-    border-color: var(--accent-cyan);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 242, 255, 0.2);
+    color: #fff;
+    border-color: rgba(0, 242, 255, 0.6);
+    box-shadow: 0 8px 30px -6px var(--glow-cyan);
+    text-shadow: 0 0 14px rgba(0, 242, 255, 0.5);
 }
 
-/* --- 发展历程 --- */
+/* --- 发展历程（霓虹时间线） --- */
 .timeline {
     max-width: 800px;
     margin: 0 auto;
-    border-left: 2px solid var(--glass-border);
+    border-left: 2px solid transparent;
+    border-image: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple), transparent) 1;
     padding-left: 30px;
     position: relative;
 }
@@ -428,22 +698,26 @@ section {
 
 .timeline-item::before {
     content: '';
-    width: 12px; 
+    width: 12px;
     height: 12px;
     background: var(--accent-cyan);
     border-radius: 50%;
     position: absolute;
     left: -37px;
     top: 5px;
-    box-shadow: 0 0 10px var(--accent-cyan);
+    box-shadow:
+        0 0 10px var(--accent-cyan),
+        0 0 24px var(--glow-cyan);
+    animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
-.year { 
-    color: var(--accent-cyan); 
-    font-weight: bold; 
-    margin-bottom: 5px; 
+.year {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    margin-bottom: 5px;
     display: block;
     font-size: 18px;
+    text-shadow: 0 0 14px rgba(0, 242, 255, 0.4);
 }
 
 .timeline-item h3 {
@@ -458,7 +732,7 @@ section {
 
 /* --- 联系方式 --- */
 .contact-section {
-    background: linear-gradient(to top, #000, var(--bg-color));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
     text-align: center;
 }
 
@@ -474,27 +748,28 @@ section {
     min-width: 200px;
 }
 
-.contact-item h4 { 
-    color: var(--text-sub); 
-    margin-bottom: 10px; 
+.contact-item h4 {
+    color: var(--text-sub);
+    margin-bottom: 10px;
     font-size: 14px;
     font-weight: normal;
+    letter-spacing: 1px;
 }
 
-.contact-item p { 
-    font-size: 24px; 
-    font-weight: 700; 
-    color: #fff; 
+.contact-item p {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
 }
 
-.contact-item a { 
-    transition: 0.3s; 
+.contact-item a {
+    transition: 0.3s;
     display: inline-block;
 }
 
-.contact-item a:hover { 
-    color: var(--accent-cyan); 
-    text-shadow: 0 0 15px var(--accent-cyan); 
+.contact-item a:hover {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 18px var(--glow-cyan);
     transform: scale(1.05);
 }
 
@@ -503,9 +778,11 @@ footer {
     text-align: center;
     padding: 30px;
     font-size: 12px;
-    color: #555;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    background: rgba(0, 0, 0, 0.3);
+    color: #5a6a80;
+    border-top: 1px solid rgba(140, 180, 255, 0.08);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 footer p {
@@ -514,37 +791,37 @@ footer p {
 
 /* --- 响应式调整 --- */
 @media (max-width: 768px) {
-    .nav-links { 
-        display: none; 
+    .nav-links {
+        display: none;
     }
-    
-    .mobile-menu-btn { 
-        display: block; 
+
+    .mobile-menu-btn {
+        display: block;
     }
-    
-    .hero h1 { 
-        font-size: 2.2rem; 
+
+    .hero h1 {
+        font-size: 2.2rem;
     }
-    
-    .business-layout { 
-        grid-template-columns: 1fr; 
+
+    .business-layout {
+        grid-template-columns: 1fr;
     }
-    
-    .contact-item p { 
-        font-size: 18px; 
+
+    .contact-item p {
+        font-size: 18px;
     }
-    
-    .features { 
-        grid-template-columns: 1fr; 
+
+    .features {
+        grid-template-columns: 1fr;
     }
-    
+
     .contact-box {
         flex-direction: column;
         gap: 30px;
     }
-    
+
     section {
-        padding: 60px 5%;
+        padding: 70px 5%;
     }
 }
 
@@ -552,17 +829,28 @@ footer p {
     .hero h1 {
         font-size: 1.8rem;
     }
-    
+
     .hero p {
         font-size: 0.9rem;
     }
-    
+
     .card {
         padding: 30px 20px;
     }
-    
+
     .biz-group {
         padding: 30px 20px;
+    }
+}
+
+/* --- 减少动态效果偏好 --- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 
@@ -575,9 +863,14 @@ footer p {
 html {
     scroll-behavior: smooth;
 }
+
     </style>
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
 </head>
 <body>
+
+    <!-- WebGL 流体动态背景 -->
+    <canvas id="fluid-canvas"></canvas>
 
     <!-- 导航栏 -->
     <header>
@@ -606,6 +899,7 @@ html {
         <div onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="cta-btn">
             开启智能化转型
         </div>
+        <div class="scroll-indicator" aria-hidden="true"></div>
     </section>
 
     <!-- 核心优势 -->
@@ -745,7 +1039,239 @@ html {
     </footer>
 
     <script>
-// 滚动显现动画逻辑
+/* ============================================================
+   kchc.ai — 前端交互 & WebGL 流体背景引擎（零依赖原生实现）
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. WebGL 流体 3D 动态背景
+   基于分形噪声 + 域扭曲（Domain Warping）的实时着色器，
+   呈现青/紫色调的流动星云效果，并响应鼠标位置。
+   ------------------------------------------------------------ */
+(function initFluidBackground() {
+    const canvas = document.getElementById('fluid-canvas');
+    if (!canvas) return;
+
+    // 尊重用户的"减少动态效果"系统偏好
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const gl = canvas.getContext('webgl', {
+        alpha: false,
+        antialias: false,
+        depth: false,
+        stencil: false,
+        powerPreference: 'low-power'
+    });
+
+    if (!gl) {
+        // WebGL 不可用时回退为 CSS 渐变背景
+        document.body.classList.add('no-webgl');
+        return;
+    }
+
+    const vertSrc = `
+        attribute vec2 a_pos;
+        void main() {
+            gl_Position = vec4(a_pos, 0.0, 1.0);
+        }
+    `;
+
+    const fragSrc = `
+        precision highp float;
+        uniform vec2  u_res;
+        uniform float u_time;
+        uniform vec2  u_mouse;
+
+        float hash(vec2 p) {
+            p = fract(p * vec2(123.34, 456.21));
+            p += dot(p, p + 45.32);
+            return fract(p.x * p.y);
+        }
+
+        float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            f = f * f * (3.0 - 2.0 * f);
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vec2(1.0, 1.0));
+            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
+
+        float fbm(vec2 p) {
+            float v = 0.0;
+            float amp = 0.55;
+            mat2 rot = mat2(0.8, 0.6, -0.6, 0.8);
+            for (int i = 0; i < 5; i++) {
+                v += amp * noise(p);
+                p = rot * p * 2.02;
+                amp *= 0.5;
+            }
+            return v;
+        }
+
+        void main() {
+            vec2 uv = (gl_FragCoord.xy * 2.0 - u_res) / min(u_res.x, u_res.y);
+            float t = u_time * 0.055;
+
+            // 三层域扭曲，产生流体般的湍流
+            vec2 p = uv * 1.35;
+            p += 0.30 * vec2(fbm(p + t), fbm(p - t * 0.8));
+
+            vec2 q = vec2(
+                fbm(p + vec2(1.7, 9.2) + t * 1.2),
+                fbm(p + vec2(8.3, 2.8) - t * 0.9)
+            );
+            vec2 r = vec2(
+                fbm(p + 3.6 * q + vec2(1.7, 9.2) + t * 0.4),
+                fbm(p + 3.6 * q + vec2(8.3, 2.8) - t * 0.3)
+            );
+            float f = fbm(p + 3.2 * r + u_mouse * 0.25);
+
+            // 配色：深空蓝 → 电光青 → 霓虹紫
+            vec3 deep   = vec3(0.012, 0.024, 0.055);
+            vec3 blue   = vec3(0.030, 0.130, 0.380);
+            vec3 cyan   = vec3(0.000, 0.950, 1.000);
+            vec3 purple = vec3(0.737, 0.075, 0.996);
+
+            vec3 col = mix(deep, blue, clamp(f * f * 2.4, 0.0, 1.0));
+            col = mix(col, purple * 0.50, clamp(length(q) * 0.55, 0.0, 1.0) * smoothstep(0.15, 0.95, r.x));
+            col = mix(col, cyan * 0.45, clamp(pow(f, 3.0) * 1.5, 0.0, 1.0));
+
+            // 鼠标光晕
+            float d = length(uv - u_mouse);
+            col += cyan * 0.07 * exp(-d * 2.6);
+            col += purple * 0.04 * exp(-d * 4.5);
+
+            // 暗角，聚焦中心
+            col *= 1.0 - 0.38 * dot(uv * 0.62, uv * 0.62);
+
+            gl_FragColor = vec4(col, 1.0);
+        }
+    `;
+
+    function compile(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+            console.warn('Shader error:', gl.getShaderInfoLog(s));
+            return null;
+        }
+        return s;
+    }
+
+    const vs = compile(gl.VERTEX_SHADER, vertSrc);
+    const fs = compile(gl.FRAGMENT_SHADER, fragSrc);
+    if (!vs || !fs) { document.body.classList.add('no-webgl'); return; }
+
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    // 全屏三角形
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a_pos');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes = gl.getUniformLocation(prog, 'u_res');
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+    // 性能：限制渲染分辨率（流体是低频图案，降采样几乎无损画质）
+    const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+    const SCALE = 0.6;
+
+    function resize() {
+        const w = Math.floor(window.innerWidth * DPR * SCALE);
+        const h = Math.floor(window.innerHeight * DPR * SCALE);
+        if (canvas.width !== w || canvas.height !== h) {
+            canvas.width = w;
+            canvas.height = h;
+            gl.viewport(0, 0, w, h);
+        }
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // 鼠标位置（平滑跟随）
+    let targetX = 0, targetY = 0, mouseX = 0, mouseY = 0;
+    window.addEventListener('pointermove', (e) => {
+        const mins = Math.min(window.innerWidth, window.innerHeight);
+        targetX = (e.clientX * 2 - window.innerWidth) / mins;
+        targetY = -(e.clientY * 2 - window.innerHeight) / mins;
+    }, { passive: true });
+
+    let running = true;
+    document.addEventListener('visibilitychange', () => {
+        running = !document.hidden;
+        if (running) requestAnimationFrame(frame);
+    });
+
+    const start = performance.now();
+    let lastDraw = 0;
+
+    function frame(now) {
+        if (!running) return;
+        // 静态偏好时只渲染一帧；正常时锁 ~30fps 省电
+        if (!reduceMotion) requestAnimationFrame(frame);
+        if (now - lastDraw < 33) return;
+        lastDraw = now;
+
+        mouseX += (targetX - mouseX) * 0.05;
+        mouseY += (targetY - mouseY) * 0.05;
+
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, (now - start) / 1000);
+        gl.uniform2f(uMouse, mouseX, mouseY);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    requestAnimationFrame(frame);
+})();
+
+/* ------------------------------------------------------------
+   2. 卡片 3D 倾斜 + 鼠标光晕跟随（桌面端）
+   ------------------------------------------------------------ */
+(function initCardTilt() {
+    if (window.matchMedia('(hover: none)').matches) return; // 触屏跳过
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const MAX_TILT = 6; // 度
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.card, .logo-item').forEach(card => {
+            card.addEventListener('pointermove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+
+                // 光晕位置（供 CSS 使用）
+                card.style.setProperty('--mx', (px * 100) + '%');
+                card.style.setProperty('--my', (py * 100) + '%');
+
+                // 3D 倾斜
+                const rx = (0.5 - py) * MAX_TILT;
+                const ry = (px - 0.5) * MAX_TILT;
+                card.style.transform =
+                    'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px)';
+            });
+
+            card.addEventListener('pointerleave', () => {
+                card.style.transform = '';
+            });
+        });
+    });
+})();
+
+/* ------------------------------------------------------------
+   3. 滚动显现动画
+   ------------------------------------------------------------ */
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -755,29 +1281,27 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// 观察所有需要动画的元素
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.scroll-anim, .card, .timeline-item').forEach(el => {
         observer.observe(el);
     });
 });
 
-// 移动端菜单切换
+/* ------------------------------------------------------------
+   4. 移动端菜单
+   ------------------------------------------------------------ */
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
 if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
-        if (mobileMenu.classList.contains('active')) {
-            mobileMenuBtn.textContent = '✕';
-        } else {
-            mobileMenuBtn.textContent = '☰';
-        }
+        mobileMenuBtn.textContent = mobileMenu.classList.contains('active') ? '✕' : '☰';
     });
 
     mobileMenu.querySelectorAll('a').forEach(link => {
@@ -795,63 +1319,55 @@ if (mobileMenuBtn && mobileMenu) {
     });
 }
 
-// 导航栏滚动效果
-let lastScroll = 0;
+/* ------------------------------------------------------------
+   5. 导航栏滚动状态
+   ------------------------------------------------------------ */
 const header = document.querySelector('header');
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
+    if (window.pageYOffset > 100) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
-    
-    lastScroll = currentScroll;
-});
+}, { passive: true });
 
-// Logo 点击返回顶部
+/* ------------------------------------------------------------
+   6. Logo 回顶部 & 锚点平滑滚动
+   ------------------------------------------------------------ */
 const logo = document.querySelector('.logo');
 if (logo) {
     logo.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 
-// 平滑滚动到锚点
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         if (href === '#' || href === '#!') return;
-        
+
         e.preventDefault();
         const target = document.querySelector(href);
-        
+
         if (target) {
             const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
     });
 });
 
-// 添加页面加载动画
+/* ------------------------------------------------------------
+   7. 页面加载淡入
+   ------------------------------------------------------------ */
 window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease-in';
-        document.body.style.opacity = '1';
-    }, 100);
+    document.body.classList.add('loaded');
 });
+
     </script>
 </body>
 </html>
+
