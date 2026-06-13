@@ -1,186 +1,196 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="北京康城合创 - AGI时代的算力领航者，专业的AI基础设施与应用服务综合提供商">
-    <meta name="keywords" content="AI算力,人工智能,大模型,生物识别,火山引擎,北京康城合创">
-    <title>北京康城合创 | kchc.ai - AGI时代的算力领航者</title>
-    <link rel="stylesheet" href="styles.css">
-    <noscript><style>body { opacity: 1 !important; }</style></noscript>
-</head>
-<body>
-
-    <!-- WebGL 流体动态背景 -->
-    <canvas id="fluid-canvas"></canvas>
-
-    <!-- 导航栏 -->
-    <header>
-        <div class="logo">kchc.ai</div>
-        <nav class="nav-links">
-            <a href="#solutions">解决方案</a>
-            <a href="#services">服务体系</a>
-            <a href="#cases">客户案例</a>
-            <a href="#about">关于我们</a>
-            <a href="#contact">联系我们</a>
-        </nav>
-        <div class="mobile-menu-btn" id="mobileMenuBtn">☰</div>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#solutions">解决方案</a>
-            <a href="#services">服务体系</a>
-            <a href="#cases">客户案例</a>
-            <a href="#about">关于我们</a>
-            <a href="#contact">联系我们</a>
-        </div>
-    </header>
-
-    <!-- Hero 首屏 -->
-    <section class="hero">
-        <h1>从感知智能<br>到AGI时代的算力领航者</h1>
-        <p>北京康城合创 —— 您的AI基础设施与应用服务综合提供商</p>
-        <div onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="cta-btn">
-            开启智能化转型
-        </div>
-        <div class="scroll-indicator" aria-hidden="true"></div>
-    </section>
-
-    <!-- 核心优势 -->
-    <section class="scroll-anim" id="about">
-        <div class="section-title"><span>为什么选择康城合创</span></div>
-        <div class="features">
-            <div class="card">
-                <div class="icon-box">✦</div>
-                <h3>技术同源，能力升级</h3>
-                <p>从生物识别到大模型，12年AI工程化落地经验。将金融级的高并发、高安全能力平滑迁移至AI算力服务。</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">☁</div>
-                <h3>软硬一体，双轮驱动</h3>
-                <p>火山引擎云原生架构 + 高性能GPU算力集群。不仅提供硬件，更提供从底层到应用的全栈环境搭建。</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">🛡</div>
-                <h3>央企标准，信赖交付</h3>
-                <p>沿袭中国人民银行与国家电网的严苛交付标准，确保每一份算力、每一个应用都安全、稳定、合规。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 业务版图 -->
-    <section class="scroll-anim" id="solutions">
-        <div class="section-title"><span>业务版图</span></div>
-        <div class="business-layout">
-            <!-- 创新引擎 -->
-            <div class="biz-group biz-engine card">
-                <h3 style="color: var(--accent-purple);">创新引擎 · AI算力与云基座</h3>
-                <p style="margin-bottom: 20px;">面向大模型训练与推理时代，解决"算力焦虑"。</p>
-                <ul class="biz-list">
-                    <li><strong>AI算力服务器集成</strong>：高性能GPU集群解决方案</li>
-                    <li><strong>火山引擎全系服务</strong>：云原生、边缘计算、大数据</li>
-                    <li><strong>企业级智连安全</strong>：代理"飞连"All-in-One办公安全平台</li>
-                </ul>
-            </div>
-            <!-- 稳健基石 -->
-            <div class="biz-group biz-foundation card">
-                <h3 style="color: var(--accent-cyan);">稳健基石 · 智能识别与安防</h3>
-                <p style="margin-bottom: 20px;">成熟的感知智能技术，守护国家关键基础设施。</p>
-                <ul class="biz-list">
-                    <li><strong>金融级生物识别</strong>：人行标准活体指纹、高精人脸识别</li>
-                    <li><strong>智慧空间管理</strong>：智能视频分析、通道闸机系统</li>
-                    <li><strong>园区数字化</strong>：访客管理与安防综合平台</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 服务体系 -->
-    <section class="scroll-anim" id="services">
-        <div class="section-title"><span>服务体系</span></div>
-        <div class="features">
-            <div class="card">
-                <div class="icon-box">💼</div>
-                <h3>咨询规划</h3>
-                <p>专业的AI转型咨询，为企业量身定制算力与智能化解决方案。</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">⚙️</div>
-                <h3>系统集成</h3>
-                <p>从硬件部署到软件配置，提供一站式系统集成服务。</p>
-            </div>
-            <div class="card">
-                <div class="icon-box">🔧</div>
-                <h3>运维支持</h3>
-                <p>7×24小时技术支持，确保系统稳定运行与持续优化。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 客户案例 -->
-    <section class="scroll-anim" id="cases">
-        <div class="section-title"><span>值得信赖的合作伙伴</span></div>
-        <div class="logos">
-            <div class="logo-item">中国人民银行</div>
-            <div class="logo-item">国家电网</div>
-            <div class="logo-item">中国化工</div>
-            <div class="logo-item">深业集团</div>
-            <div class="logo-item">字节跳动 | 火山引擎</div>
-            <div class="logo-item">自动驾驶独角兽企业</div>
-        </div>
-        <div style="text-align: center; margin-top: 40px; color: var(--text-sub);">
-            <p>服务大量重要客户与AI新势力，以"高安全、高稳定、高效率"赢得长期信赖。</p>
-        </div>
-    </section>
-
-    <!-- 发展历程 -->
-    <section class="scroll-anim">
-        <div class="section-title"><span>发展历程</span></div>
-        <div class="timeline">
-            <div class="timeline-item">
-                <span class="year">2025 - 未来</span>
-                <h3>AI元年再出发</h3>
-                <p>全面布局AI算力服务器与行业应用，做AI浪潮中的长期主义者。</p>
-            </div>
-            <div class="timeline-item">
-                <span class="year">2020 - 2024</span>
-                <h3>云智转型</h3>
-                <p>携手字节跳动火山引擎，代理飞连与云服务，服务自动驾驶与AI行业客户。</p>
-            </div>
-            <div class="timeline-item">
-                <span class="year">2012 - 2019</span>
-                <h3>AI原生</h3>
-                <p>深耕模式识别和生物识别，服务人行、国网等央企，积累高安全级系统集成经验，夯实AI原生基础。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系我们 -->
-    <section class="contact-section scroll-anim" id="contact">
-        <div class="section-title"><span>联系我们</span></div>
-        <p style="color: var(--text-sub);">北京康城合创科技有限公司</p>
-        <p style="color: var(--text-sub); margin-bottom: 30px;">北京市丰台区</p>
-        
-        <div class="contact-box">
-            <div class="contact-item">
-                <h4>24小时业务热线</h4>
-                <p><a href="tel:18518156777">185-1815-6777</a></p>
-            </div>
-            <div class="contact-item">
-                <h4>公司总机</h4>
-                <p><a href="tel:01063893886">010-6389-3886</a></p>
-            </div>
-            <div class="contact-item">
-                <h4>商务邮箱</h4>
-                <p><a href="mailto:zuobing@atlantis9.com" style="font-size: 20px;">zuobing@kchc.ai</a></p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2012-2025 Beijing Kangcheng Hechuang Technology Co., Ltd. All Rights Reserved.</p>
-        <p>www.kchc.ai</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="北京康城合創 - AGI 時代的算力領航者，專業的 AI 基礎設施與應用服務綜合提供商">
+    <meta name="keywords" content="AI算力,人工智能,大模型,生物識別,火山引擎,北京康城合創">
+    <title>北京康城合創 | kchc.ai - AGI 時代的算力領航者</title>
+    <link rel="stylesheet" href="styles.css">
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+</head>
+<body>
+
+    <canvas id="fluid-canvas"></canvas>
+
+    <header>
+        <div class="logo">kchc.ai</div>
+        <nav class="nav-links">
+            <a href="#solutions" data-i18n="nav.solutions">解決方案</a>
+            <a href="#services" data-i18n="nav.services">服務體系</a>
+            <a href="#cases" data-i18n="nav.cases">客戶案例</a>
+            <a href="#about" data-i18n="nav.about">關於我們</a>
+            <a href="#contact" data-i18n="nav.contact">聯繫我們</a>
+            <div class="lang-switcher" role="group" aria-label="Language">
+                <button type="button" class="lang-btn active" data-lang="zh-TW">繁體中文</button>
+                <span class="lang-divider" aria-hidden="true">|</span>
+                <button type="button" class="lang-btn" data-lang="en">English</button>
+            </div>
+        </nav>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">☰</div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#solutions" data-i18n="nav.solutions">解決方案</a>
+            <a href="#services" data-i18n="nav.services">服務體系</a>
+            <a href="#cases" data-i18n="nav.cases">客戶案例</a>
+            <a href="#about" data-i18n="nav.about">關於我們</a>
+            <a href="#contact" data-i18n="nav.contact">聯繫我們</a>
+            <div class="lang-switcher lang-switcher-mobile" role="group" aria-label="Language">
+                <button type="button" class="lang-btn active" data-lang="zh-TW">繁體中文</button>
+                <span class="lang-divider" aria-hidden="true">|</span>
+                <button type="button" class="lang-btn" data-lang="en">English</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1 data-i18n-html="hero.title">從感知智能<br>到 AGI 時代的算力領航者</h1>
+        <p data-i18n="hero.subtitle">北京康城合創 —— 您的 AI 基礎設施與應用服務綜合提供商</p>
+        <div onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="cta-btn" data-i18n="hero.cta">
+            開啟智能化轉型
+        </div>
+        <div class="scroll-indicator" aria-hidden="true"></div>
+    </section>
+
+    <section class="scroll-anim" id="about">
+        <div class="section-title"><span data-i18n="about.title">為什麼選擇康城合創</span></div>
+        <div class="features">
+            <div class="card">
+                <div class="icon-box">✦</div>
+                <h3 data-i18n="about.card1.title">技術同源，能力升級</h3>
+                <p data-i18n="about.card1.text">從生物識別到大模型，12 年 AI 工程化落地經驗。將金融級的高並發、高安全能力平滑遷移至 AI 算力服務。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">☁</div>
+                <h3 data-i18n="about.card2.title">軟硬一體，雙輪驅動</h3>
+                <p data-i18n="about.card2.text">火山引擎雲原生架構 + 高效能 GPU 算力叢集。不僅提供硬體，更提供從底層到應用的全棧環境建置。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box">🛡</div>
+                <h3 data-i18n="about.card3.title">央企標準，信賴交付</h3>
+                <p data-i18n="about.card3.text">沿襲中國人民銀行與國家電網的嚴苛交付標準，確保每一份算力、每一個應用都安全、穩定、合規。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-anim" id="solutions">
+        <div class="section-title"><span data-i18n="solutions.title">業務版圖</span></div>
+        <div class="business-layout">
+            <div class="biz-group biz-engine card">
+                <h3 style="color: var(--accent-purple);" data-i18n="solutions.engine.title">創新引擎 · AI 算力與雲基座</h3>
+                <p style="margin-bottom: 20px;" data-i18n="solutions.engine.intro">面向大模型訓練與推理時代，解決「算力焦慮」。</p>
+                <ul class="biz-list">
+                    <li data-i18n-html="solutions.engine.item1"><strong>AI 算力伺服器整合</strong>：高效能 GPU 叢集解決方案</li>
+                    <li data-i18n-html="solutions.engine.item2"><strong>火山引擎全系服務</strong>：雲原生、邊緣運算、大數據</li>
+                    <li data-i18n-html="solutions.engine.item3"><strong>企業級智連安全</strong>：代理「飛連」All-in-One 辦公安全平台</li>
+                </ul>
+            </div>
+            <div class="biz-group biz-foundation card">
+                <h3 style="color: var(--accent-cyan);" data-i18n="solutions.foundation.title">穩健基石 · 智能識別與安防</h3>
+                <p style="margin-bottom: 20px;" data-i18n="solutions.foundation.intro">成熟的感知智能技術，守護國家關鍵基礎設施。</p>
+                <ul class="biz-list">
+                    <li data-i18n-html="solutions.foundation.item1"><strong>金融級生物識別</strong>：人行標準活體指紋、高精人臉識別</li>
+                    <li data-i18n-html="solutions.foundation.item2"><strong>智慧空間管理</strong>：智能視訊分析、通道閘機系統</li>
+                    <li data-i18n-html="solutions.foundation.item3"><strong>園區數位化</strong>：訪客管理與安防綜合平台</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-anim" id="services">
+        <div class="section-title"><span data-i18n="services.title">服務體系</span></div>
+        <div class="features">
+            <div class="card">
+                <div class="icon-box" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                        <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+                    </svg>
+                </div>
+                <h3 data-i18n="services.card1.title">諮詢規劃</h3>
+                <p data-i18n="services.card1.text">專業的 AI 轉型諮詢，為企業量身訂製算力與智能化解決方案。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                </div>
+                <h3 data-i18n="services.card2.title">系統整合</h3>
+                <p data-i18n="services.card2.text">從硬體部署到軟體配置，提供一站式系統整合服務。</p>
+            </div>
+            <div class="card">
+                <div class="icon-box" aria-hidden="true">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 0l1.42 1.42"></path>
+                        <path d="m3 21 8.02-8.02"></path>
+                        <path d="m12.99 6.01 1.78 1.78"></path>
+                        <path d="M17.61 10.62 21 7.22"></path>
+                    </svg>
+                </div>
+                <h3 data-i18n="services.card3.title">運維支援</h3>
+                <p data-i18n="services.card3.text">7×24 小時技術支援，確保系統穩定運行與持續優化。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-anim" id="cases">
+        <div class="section-title"><span data-i18n="cases.title">值得信賴的合作夥伴</span></div>
+        <div class="logos">
+            <div class="logo-item" data-i18n="cases.logo1">中國人民銀行</div>
+            <div class="logo-item" data-i18n="cases.logo2">國家電網</div>
+            <div class="logo-item" data-i18n="cases.logo3">中國化工</div>
+            <div class="logo-item" data-i18n="cases.logo4">深業集團</div>
+            <div class="logo-item" data-i18n="cases.logo5">字節跳動 | 火山引擎</div>
+            <div class="logo-item" data-i18n="cases.logo6">自動駕駛獨角獸企業</div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; color: var(--text-sub);">
+            <p data-i18n="cases.summary">服務大量重要客戶與 AI 新勢力，以「高安全、高穩定、高效率」贏得長期信賴。</p>
+        </div>
+    </section>
+
+    <section class="scroll-anim">
+        <div class="section-title"><span data-i18n="timeline.title">發展歷程</span></div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="year" data-i18n="timeline.item1.year">2025 - 未來</span>
+                <h3 data-i18n="timeline.item1.title">AI 元年再出發</h3>
+                <p data-i18n="timeline.item1.text">全面佈局 AI 算力伺服器與行業應用，做 AI 浪潮中的長期主義者。</p>
+            </div>
+            <div class="timeline-item">
+                <span class="year" data-i18n="timeline.item2.year">2020 - 2024</span>
+                <h3 data-i18n="timeline.item2.title">雲智轉型</h3>
+                <p data-i18n="timeline.item2.text">攜手字節跳動火山引擎，代理飛連與雲服務，服務自動駕駛與 AI 行業客戶。</p>
+            </div>
+            <div class="timeline-item">
+                <span class="year" data-i18n="timeline.item3.year">2012 - 2019</span>
+                <h3 data-i18n="timeline.item3.title">AI 原生</h3>
+                <p data-i18n="timeline.item3.text">深耕模式識別和生物識別，服務人行、國網等央企，積累高安全級系統整合經驗，夯實 AI 原生基礎。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section scroll-anim" id="contact">
+        <div class="section-title"><span data-i18n="contact.title">聯繫我們</span></div>
+        <p style="color: var(--text-sub); margin-bottom: 30px;" data-i18n="contact.company">北京康城合創科技有限公司</p>
+        <div class="contact-box">
+            <div class="contact-item">
+                <h4 data-i18n="contact.hotline">24 小時業務熱線</h4>
+                <p><a href="tel:+85257349719">+852 5734 9719</a></p>
+            </div>
+            <div class="contact-item">
+                <h4 data-i18n="contact.email">商務郵箱</h4>
+                <p><a href="mailto:zuobing@atlantis9.com" style="font-size: 20px;">zuobing@kchc.ai</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer.copyright">© 2012-2026 北京康城合創科技有限公司 版權所有</p>
+        <p data-i18n="footer.disclaimer">聲明：僅供向香港地區及非中國大陸地區客戶展示公司業務使用。</p>
+        <p>www.kchc.ai</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
