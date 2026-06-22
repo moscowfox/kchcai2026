@@ -397,7 +397,7 @@ const TRANSLATIONS = {
             logo2: '國家電網',
             logo3: '中國化工',
             logo4: '深業集團',
-            logo5: '國家電網下屬企業',
+            logo5: '中交信科下屬企業',
             logo6: 'AI 獨角獸企業',
             summary: '服務大量重要客戶與 AI 新勢力，以「高安全、高穩定、高效率」贏得長期信賴。'
         },
@@ -501,7 +501,7 @@ const TRANSLATIONS = {
             logo2: 'State Grid Corporation of China',
             logo3: 'ChemChina',
             logo4: 'Shenye Group',
-            logo5: 'State Grid Subsidiaries',
+            logo5: 'CCCC IT Subsidiaries',
             logo6: 'Leading AI Unicorn Companies',
             summary: 'Serving major clients and AI innovators with high security, stability, and efficiency—earning long-term trust.'
         },
