@@ -330,7 +330,7 @@ const TRANSLATIONS = {
         meta: {
             title: '北京康城合創 | kchc.ai - AGI 時代的算力領航者',
             description: '北京康城合創 - AGI 時代的算力領航者，專業的 AI 基礎設施與應用服務綜合提供商',
-            keywords: 'AI算力,人工智能,大模型,生物識別,火山引擎,北京康城合創'
+            keywords: 'AI算力,人工智慧,大模型,生物識別,北京康城合創'
         },
         nav: {
             solutions: '解決方案',
@@ -340,9 +340,9 @@ const TRANSLATIONS = {
             contact: '聯繫我們'
         },
         hero: {
-            title: '從感知智能<br>到 AGI 時代的算力領航者',
+            title: '從感知智慧<br>到 AGI 時代的算力領航者',
             subtitle: '北京康城合創 —— 您的 AI 基礎設施與應用服務綜合提供商',
-            cta: '開啟智能化轉型'
+            cta: '開啟智慧化轉型'
         },
         about: {
             title: '為什麼選擇康城合創',
@@ -352,7 +352,7 @@ const TRANSLATIONS = {
             },
             card2: {
                 title: '軟硬一體，雙輪驅動',
-                text: '火山引擎雲原生架構 + 高效能 GPU 算力叢集。不僅提供硬體，更提供從底層到應用的全棧環境建置。'
+                text: '雲原生架構 + 高效能 GPU 算力叢集。不僅提供硬體，更提供從底層到應用的全棧環境建置。'
             },
             card3: {
                 title: '央企標準，信賴交付',
@@ -365,14 +365,14 @@ const TRANSLATIONS = {
                 title: '創新引擎 · AI 算力與雲基座',
                 intro: '面向大模型訓練與推理時代，解決「算力焦慮」。',
                 item1: '<strong>AI 算力伺服器整合</strong>：高效能 GPU 叢集解決方案',
-                item2: '<strong>火山引擎全系服務</strong>：雲原生、邊緣運算、大數據',
-                item3: '<strong>企業級智連安全</strong>：代理「飛連」All-in-One 辦公安全平台'
+                item2: '<strong>AI 原生全系服務</strong>：雲原生、邊緣運算、大數據',
+                item3: '<strong>企業級網路安全</strong>：為業務安全保駕護航'
             },
             foundation: {
-                title: '穩健基石 · 智能識別與安防',
-                intro: '成熟的感知智能技術，守護國家關鍵基礎設施。',
+                title: '穩健基石 · 智慧識別與安防',
+                intro: '成熟的感知智慧技術，守護關鍵基礎設施。',
                 item1: '<strong>金融級生物識別</strong>：人行標準活體指紋、高精人臉識別',
-                item2: '<strong>智慧空間管理</strong>：智能視訊分析、通道閘機系統',
+                item2: '<strong>智慧空間管理</strong>：智慧視訊分析、通道閘機系統',
                 item3: '<strong>園區數位化</strong>：訪客管理與安防綜合平台'
             }
         },
@@ -380,7 +380,7 @@ const TRANSLATIONS = {
             title: '服務體系',
             card1: {
                 title: '諮詢規劃',
-                text: '專業的 AI 轉型諮詢，為企業量身訂製算力與智能化解決方案。'
+                text: '專業的 AI 轉型諮詢，為企業量身訂製算力與智慧化解決方案。'
             },
             card2: {
                 title: '系統整合',
@@ -397,8 +397,8 @@ const TRANSLATIONS = {
             logo2: '國家電網',
             logo3: '中國化工',
             logo4: '深業集團',
-            logo5: '字節跳動 | 火山引擎',
-            logo6: '自動駕駛獨角獸企業',
+            logo5: '國家電網下屬企業',
+            logo6: 'AI 獨角獸企業',
             summary: '服務大量重要客戶與 AI 新勢力，以「高安全、高穩定、高效率」贏得長期信賴。'
         },
         timeline: {
@@ -411,7 +411,7 @@ const TRANSLATIONS = {
             item2: {
                 year: '2020 - 2024',
                 title: '雲智轉型',
-                text: '攜手字節跳動火山引擎，代理飛連與雲服務，服務自動駕駛與 AI 行業客戶。'
+                text: 'AI 服務轉型，服務汽車行業與 AI 行業客戶。'
             },
             item3: {
                 year: '2012 - 2019',
@@ -434,7 +434,7 @@ const TRANSLATIONS = {
         meta: {
             title: 'Beijing Kangcheng Hechuang | kchc.ai - Compute Leader in the AGI Era',
             description: 'Beijing Kangcheng Hechuang — Your comprehensive provider of AI infrastructure and application services, leading the compute frontier in the AGI era.',
-            keywords: 'AI compute, artificial intelligence, large language models, biometrics, Volcano Engine, Beijing Kangcheng Hechuang'
+            keywords: 'AI compute, artificial intelligence, large language models, biometrics, Beijing Kangcheng Hechuang'
         },
         nav: {
             solutions: 'Solutions',
@@ -446,7 +446,7 @@ const TRANSLATIONS = {
         hero: {
             title: 'From Perceptive Intelligence<br>to a Compute Leader in the AGI Era',
             subtitle: 'Beijing Kangcheng Hechuang — Your comprehensive provider of AI infrastructure and application services',
-            cta: 'Start Your Intelligent Transformation'
+            cta: 'Begin Your Smart Transformation'
         },
         about: {
             title: 'Why Choose Kangcheng Hechuang',
@@ -456,7 +456,7 @@ const TRANSLATIONS = {
             },
             card2: {
                 title: 'Integrated Hardware and Software',
-                text: 'Volcano Engine cloud-native architecture plus high-performance GPU compute clusters. We deliver full-stack environments from infrastructure to applications—not just hardware.'
+                text: 'Cloud-native architecture plus high-performance GPU compute clusters. We deliver full-stack environments from infrastructure to applications—not just hardware.'
             },
             card3: {
                 title: 'State-Owned Enterprise Standards',
@@ -469,12 +469,12 @@ const TRANSLATIONS = {
                 title: 'Innovation Engine · AI Compute & Cloud Foundation',
                 intro: 'Addressing compute scarcity in the era of large-model training and inference.',
                 item1: '<strong>AI Compute Server Integration</strong>: High-performance GPU cluster solutions',
-                item2: '<strong>Volcano Engine Full-Stack Services</strong>: Cloud-native, edge computing, and big data',
-                item3: '<strong>Enterprise Secure Connectivity</strong>: Authorized partner for Feilian All-in-One workplace security'
+                item2: '<strong>AI-Native Full-Stack Services</strong>: Cloud-native, edge computing, and big data',
+                item3: '<strong>Enterprise Network Security</strong>: Safeguarding business security'
             },
             foundation: {
-                title: 'Trusted Foundation · Intelligent Recognition & Security',
-                intro: 'Mature perceptual intelligence technologies safeguarding critical national infrastructure.',
+                title: 'Trusted Foundation · Smart Recognition & Security',
+                intro: 'Mature perceptual AI technologies safeguarding critical infrastructure.',
                 item1: '<strong>Financial-Grade Biometrics</strong>: PBOC-standard liveness fingerprint and high-precision facial recognition',
                 item2: '<strong>Smart Space Management</strong>: Intelligent video analytics and access control systems',
                 item3: '<strong>Campus Digitalization</strong>: Visitor management and integrated security platforms'
@@ -484,7 +484,7 @@ const TRANSLATIONS = {
             title: 'Service Portfolio',
             card1: {
                 title: 'Consulting & Planning',
-                text: 'Expert AI transformation consulting with tailored compute and intelligent solutions for your business.'
+                text: 'Expert AI transformation consulting with tailored compute and smart solutions for your business.'
             },
             card2: {
                 title: 'System Integration',
@@ -501,8 +501,8 @@ const TRANSLATIONS = {
             logo2: 'State Grid Corporation of China',
             logo3: 'ChemChina',
             logo4: 'Shenye Group',
-            logo5: 'ByteDance | Volcano Engine',
-            logo6: 'Leading Autonomous Driving Companies',
+            logo5: 'State Grid Subsidiaries',
+            logo6: 'Leading AI Unicorn Companies',
             summary: 'Serving major clients and AI innovators with high security, stability, and efficiency—earning long-term trust.'
         },
         timeline: {
@@ -515,7 +515,7 @@ const TRANSLATIONS = {
             item2: {
                 year: '2020 - 2024',
                 title: 'Cloud & Intelligence Transformation',
-                text: 'Partnering with ByteDance Volcano Engine as an authorized Feilian and cloud services partner for autonomous driving and AI industry clients.'
+                text: 'AI services transformation, serving the automotive industry and AI sector clients.'
             },
             item3: {
                 year: '2012 - 2019',

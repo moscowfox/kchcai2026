@@ -20,7 +20,7 @@ cat > /var/www/html/index.html << 'INDEX_EOF'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="北京康城合创 - AGI时代的算力领航者，专业的AI基础设施与应用服务综合提供商">
-    <meta name="keywords" content="AI算力,人工智能,大模型,生物识别,火山引擎,北京康城合创">
+    <meta name="keywords" content="AI算力,人工智能,大模型,生物识别,北京康城合创">
     <title>北京康城合创 | kchc.ai - AGI时代的算力领航者</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -67,7 +67,7 @@ cat > /var/www/html/index.html << 'INDEX_EOF'
             <div class="card">
                 <div class="icon-box">☁</div>
                 <h3>软硬一体，双轮驱动</h3>
-                <p>火山引擎云原生架构 + 高性能GPU算力集群。不仅提供硬件，更提供从底层到应用的全栈环境搭建。</p>
+                <p>云原生架构 + 高性能GPU算力集群。不仅提供硬件，更提供从底层到应用的全栈环境搭建。</p>
             </div>
             <div class="card">
                 <div class="icon-box">🛡</div>
@@ -87,8 +87,8 @@ cat > /var/www/html/index.html << 'INDEX_EOF'
                 <p style="margin-bottom: 20px;">面向大模型训练与推理时代，解决"算力焦虑"。</p>
                 <ul class="biz-list">
                     <li><strong>AI算力服务器集成</strong>：高性能GPU集群解决方案</li>
-                    <li><strong>火山引擎全系服务</strong>：云原生、边缘计算、大数据</li>
-                    <li><strong>企业级智连安全</strong>：代理"飞连"All-in-One办公安全平台</li>
+                    <li><strong>AI原生全系服务</strong>：云原生、边缘计算、大数据</li>
+                    <li><strong>企业级网络安全</strong>：为业务安全保驾护航</li>
                 </ul>
             </div>
             <!-- 稳健基石 -->
@@ -134,7 +134,7 @@ cat > /var/www/html/index.html << 'INDEX_EOF'
             <div class="logo-item">国家电网</div>
             <div class="logo-item">中国化工</div>
             <div class="logo-item">深业集团</div>
-            <div class="logo-item">字节跳动 | 火山引擎</div>
+            <div class="logo-item">国家电网下属企业</div>
             <div class="logo-item">自动驾驶独角兽企业</div>
         </div>
         <div style="text-align: center; margin-top: 40px; color: var(--text-sub);">
@@ -154,7 +154,7 @@ cat > /var/www/html/index.html << 'INDEX_EOF'
             <div class="timeline-item">
                 <span class="year">2020 - 2024</span>
                 <h3>云智转型</h3>
-                <p>携手字节跳动火山引擎，代理飞连与云服务，服务自动驾驶与AI客户。</p>
+                <p>AI服务转型，服务行业与AI客户。</p>
             </div>
             <div class="timeline-item">
                 <span class="year">2012 - 2019</span>
